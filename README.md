@@ -1,4 +1,6 @@
-tab-generator
+Tag Generator
 =============
 
-Tab Generator - Chiefly to help people with their Shopify themes
+Go to [this page][1] for more information.
+
+[1]: http://cleanthemes.co.uk/tabitha/
