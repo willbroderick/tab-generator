@@ -7,6 +7,7 @@
 $(function(){
 	$.fn.willtabs = function(params){
         var settings = {
+        	tabTextColour: '#333',
         	tabBG: '#eee',
         	activeTabBG: '#fff',
         	borderStyle: '1px solid #999',
@@ -37,7 +38,7 @@ $(function(){
 						'border': settings.borderStyle,
 						'background': settings.tabBG,
 						'padding': '5px 15px',
-						'color': 'inherit'
+						'color': settings.tabTextColour
 					}).each(function(index){
 						if(index > 0) {
 							$(this).css('margin-left', '-1px');
