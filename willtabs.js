@@ -28,16 +28,18 @@ $(function(){
 				//Styles
 				$tabs.css({
 					'margin': settings.tabTopMargin + ' 0 0 0',
-					'display': 'block'
+					'display': 'block',
+					'border-bottom': settings.borderStyle
 				}).bind('checkstyle', function(){
-					var $lis = $(this).find('li').css({
-						'float': 'left',
-						'list-style': 'none'
-					});
+					var $lis = $(this).find('li');
 					$lis.find('a').css({
-						'border': settings.borderStyle,
+						'float': 'left',
+						'border-top': settings.borderStyle,
+						'border-right': settings.borderStyle,
+						'border-left': settings.borderStyle,
 						'background': settings.tabBG,
 						'padding': '5px 15px',
+						'margin-top': '2px',
 						'color': settings.tabTextColour
 					}).each(function(index){
 						if(index > 0) {
@@ -47,9 +49,20 @@ $(function(){
 					$lis.filter('.active').find('a').css({
 						'background': settings.activeTabBG,
 						'padding-top': '7px',
-						'margin-top': '-2px'
+						'margin-top': '0'
 					});
 				});
+				$tabs.find('li').css({
+					'float': 'left',
+					'list-style': 'none'
+				});
+				//Add clearing-li onto end (the simplest of the choice of hacks)
+				$('<li />').css({
+					'list-style': 'none',
+					'clear': 'both',
+					'height': 0
+				}).appendTo($tabs);
+				//Content style
 				$content.css({
 					'clear': 'both',
 					'padding': settings.contentPadding
