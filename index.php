@@ -13,31 +13,17 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="http://cleanthemes.co.uk/clean/wp-content/themes/the_cotton_1.1.3/style.css?1365756968" type="text/css" media="screen, projection" />
 	<link rel="stylesheet" href="http://cleanthemes.co.uk/clean/wp-content/themes/the_cotton_1.1.3/css/cssLoader.php" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8" />
 	
 	<link rel="shortcut icon" type="image/x-icon" href="http://cleanthemes.co.uk/clean/wp-content/uploads/2012/10/ct-favi.png" />
 
 	<link rel='stylesheet' id='fvch-styles-css'  href='http://cleanthemes.co.uk/clean/wp-content/plugins/fv-code-highlighter/public/css/fvch-styles.css?ver=1.1' type='text/css' media='all' />
 
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+	<script type='text/javascript' src='jquery.snippet.min.js'></script>
 	<script type='text/javascript' src='willtabs.js'></script>
 	
 	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-
-	<style type="text/css">
-	.fvch-codeblock {
-		background: url(http://cleanthemes.co.uk/clean/wp-content/plugins/fv-code-highlighter/public/images/notepaper.png) top left repeat;
-	}
-	.fvch-codeblock pre, .fvch-line-numbers pre {
-		background: url(http://cleanthemes.co.uk/clean/wp-content/plugins/fv-code-highlighter/public/images/notepaper.png) top left repeat;
-		line-height: 18px;
-		font-family: 'Monaco', 'Courier New', Courier, monospace;
-		font-size: 11px;
-	}
-	.fvch-line-numbers pre {
-		background: #e2e2e2;
-	}
-	</style>
-	<meta name="generator" content="FV Code Highlighter" />
 
 
 	<script type="text/javascript">
@@ -103,18 +89,17 @@
 					<div id="tab-demo"></div>
 
 					<h2>Now copy the following into the HTML view of your description</h2>
-					<code id="tab-resultant-markup"></code>
+					<div id="tab-resultant-markup"></div>
 
 					<div>
 						<br /><br /><br /><br /><br /><br /><br />
 						<h3>Using this somewhere where the tab code isn't already installed?</h3>
 						<p>Copy and paste this into your theme before the &lt;/body&gt; tag in theme.liquid:</p>
-						<code>
-							&lt;script&gt;
-<?php include 'willtabs.min.js' ?>;
-							$('body').willtabs();
-							&lt;/script&gt;
-						</code>
+						<pre class="html-code">
+&lt;script&gt;
+	<?php include 'willtabs.min.js' ?>;
+	$('body').willtabs();
+&lt;/script&gt;</pre>
 					</div>
 				</div>
 			</div>
@@ -151,6 +136,9 @@
 			plugins: 'paste'
 		});
 
+		//Init code regions
+		$("pre.html-code").snippet("html", {/*clipboard:'ZeroClipboard.swf'*/});
+
 		//Events for editing etc
 		$('#tab-count').bind('change', function(){
 			$('#tab-content-entry').children().hide().slice(0, parseInt($(this).val())).show();
@@ -174,7 +162,8 @@
 			//Populate outputs
 			$('#tab-demo').empty().append(newTabCont).willtabs();
 
-			$('#tab-resultant-markup').html(newTabContHTML);
+			$('#tab-resultant-markup').html('<pre>' + newTabContHTML + '</pre>');
+			$("#tab-resultant-markup pre").snippet("html", {/*clipboard:'ZeroClipboard.swf'*/});
 		};
 
 		$('#generate-tabs').bind('click', function(){
@@ -207,6 +196,5 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	<script type='text/javascript' src='http://cleanthemes.co.uk/clean/wp-content/plugins/fv-code-highlighter/public/js/toolbox.js?ver=1.0'></script>
 </body>
 </html>
