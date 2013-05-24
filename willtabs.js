@@ -4,7 +4,7 @@
 * Copyright (c) 2013 Will Broderick
 */
 
-$(function(){
+(function($){
 	$.fn.willtabs = function(params){
         var settings = {
         	tabTextColour: '#333',
@@ -80,4 +80,8 @@ $(function(){
 			});
         });
 	};
-});	
+	$(function(){
+		//DOM ready? Go!
+		$('body').willtabs();
+	});
+}(jQuery));

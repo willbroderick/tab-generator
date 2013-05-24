@@ -98,7 +98,6 @@
 						<pre class="html-code">
 &lt;script&gt;
 	<?php include 'willtabs.min.js' ?>
-	$('body').willtabs();
 &lt;/script&gt;</pre>
 					</div>
 				</div>
@@ -157,7 +156,7 @@
 			});
 
 			var newTabCont = $('<div class="willtab-container" />').append(newTabs).append(newTabAreas);
-			var newTabContHTML = htmlEntities(newTabCont.html());
+			var newTabContHTML = htmlEntities(newTabCont.wrap('<div />').parent().html());
 
 			//Populate outputs
 			$('#tab-demo').empty().append(newTabCont).willtabs();
