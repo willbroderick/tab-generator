@@ -97,7 +97,7 @@
 						<p>Copy and paste this into your theme before the &lt;/body&gt; tag in theme.liquid:</p>
 						<pre class="html-code">
 &lt;script&gt;
-	<?php include 'willtabs.min.js' ?>;
+	<?php include 'willtabs.min.js' ?>
 	$('body').willtabs();
 &lt;/script&gt;</pre>
 					</div>
