@@ -137,7 +137,7 @@
 		});
 
 		//Init code regions
-		$("pre.html-code").snippet("html", {/*clipboard:'ZeroClipboard.swf'*/});
+		$("pre.html-code").snippet("html", { style: "acid" /*clipboard:'ZeroClipboard.swf'*/});
 
 		//Events for editing etc
 		$('#tab-count').bind('change', function(){
@@ -163,7 +163,7 @@
 			$('#tab-demo').empty().append(newTabCont).willtabs();
 
 			$('#tab-resultant-markup').html('<pre>' + newTabContHTML + '</pre>');
-			$("#tab-resultant-markup pre").snippet("html", {/*clipboard:'ZeroClipboard.swf'*/});
+			$("#tab-resultant-markup pre").snippet("html", { style: "acid" /*clipboard:'ZeroClipboard.swf'*/});
 		};
 
 		$('#generate-tabs').bind('click', function(){
