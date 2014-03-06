@@ -1,4 +1,4 @@
-Tag Generator
+Tab Generator
 =============
 
 Go to [this page][1] for more information.

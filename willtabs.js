@@ -6,15 +6,18 @@
 
 (function($){
 	$.fn.willtabs = function(params){
+		//Defaults
         var settings = {
         	tabTextColour: '#333',
         	tabBG: '#eee',
+        	activeTextColour: '#333',
         	activeTabBG: '#fff',
         	borderStyle: '1px solid #999',
         	tabTopMargin: '20px',
         	contentPadding: '10px 0'
         };
         $.extend(settings, params);
+        //Find tab groups
         $(this).each(function(){
         	if($(this).hasClass('.willtab-container')) {
 	        	var $toProcess = $(this);
@@ -22,7 +25,7 @@
 				var $toProcess = $(this).find('.willtab-container');
 			}
 			$toProcess.each(function(){
-				//Vars
+				//Handy vars
 				var $tabs = $(this).children('.willtab-tabs');
 				var $content = $(this).children('.willtab-content');
 				//Styles
@@ -39,7 +42,8 @@
 						'border-left': settings.borderStyle,
 						'background': settings.tabBG,
 						'padding': '5px 15px',
-						'margin-top': '2px',
+						'margin': '2px 0 0',
+						'text-decoration': 'none',
 						'color': settings.tabTextColour
 					}).each(function(index){
 						if(index > 0) {
@@ -47,6 +51,7 @@
 						}
 					});
 					$lis.filter('.active').find('a').css({
+						'color': settings.activeTextColour,
 						'background': settings.activeTabBG,
 						'padding-top': '7px',
 						'margin-top': '0'
@@ -54,9 +59,10 @@
 				});
 				$tabs.find('li').css({
 					'float': 'left',
-					'list-style': 'none'
+					'list-style': 'none',
+					'margin': '0'
 				});
-				//Add clearing-li onto end (the simplest of the choice of hacks)
+				//Add clearing-li onto end (the simplest of the many choices of hacks)
 				$('<li />').css({
 					'list-style': 'none',
 					'clear': 'both',
@@ -66,6 +72,10 @@
 				$content.css({
 					'clear': 'both',
 					'padding': settings.contentPadding
+				});
+				//Set titles when hidden
+				$tabs.find('a[data-title]').each(function(){
+					$(this).html($(this).attr('data-title'));
 				});
 				//Set events
 				$tabs.find('a').bind('click', function(){

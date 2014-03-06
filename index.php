@@ -55,7 +55,7 @@
 				<div class="clear"></div>
 
 				<div id="intro">
-					<h1>General-Purpose Tag Generator by Clean Themes</h1>
+					<h1>General-Purpose Tab Generator by Clean Themes</h1>
 					<div class="double-line"></div>
 				</div>
 
@@ -64,8 +64,19 @@
 
 			<div id="content-container">
 				<div id="content">
+					<p>First, some quick instructions!</p>
 					<p>
-						<label for="tab-count">How many tabs?</label>
+						<ol>
+							<li>If you haven't already done so already, copy the code from the bottom of this page into your template. Note that this code comes bundled with the Expression theme, from March onwards.</li>
+							<li>Choose the number of tabs to show.</li>
+							<li>Enter your content into each of the big text input areas. Make sure it looks right in here before copying the code over to Shopify later!</li>
+							<li>Click 'Generate Tabs' to regenerate the code-to-copy.</li>
+							<li>Copy and paste the generated HTML into your Shopify description. Make sure to click 'Show HTML' before doing so! This is HTML you're copying in, not text!</li>
+						</ol>
+					</p>
+					<hr />
+					<p>
+						<h2><label for="tab-count">How many tabs do you need?</label></h2>
 						<select id="tab-count">
 							<option>2</option>
 							<option>3</option>
@@ -74,37 +85,50 @@
 							<option>6</option>
 						</select>
 					</p>
+
+					<hr />
 					
 					<h2>Enter your content here (paste it in from Word, if you like)</h2>
 					<div id="tab-content-entry"></div>
 
 					
-					
+					<br /><br />
+					<hr />
 					<h2>How does it look?</h2>
 					
-					<button id="generate-tabs" class="button">GENERATE TABS</button>
+					<p>
+						Click this button to generate the tabs: <button id="generate-tabs" class="button">GENERATE TABS</button>
+					</p>
+					<p>Then, see how it looks below:</p>
+
 					<br />
 					<br />
 
 					<div id="tab-demo"></div>
 
-					<h2>Now copy the following into the HTML view of your description</h2>
+					<br />
+					<br />
+					<hr />
+
+					<h2>Now, copy the following into the HTML view of your description</h2>
 					<div id="tab-resultant-markup"></div>
 
 					<div>
-						<br /><br /><br /><br /><br /><br /><br />
-						<h3>Using this somewhere where the tab code isn't already installed?</h3>
-						<p>Copy and paste this into your theme before the &lt;/body&gt; tag in theme.liquid:</p>
-						<pre class="html-code">
-&lt;script&gt;
-	<?php include 'willtabs.min.js' ?>
+						<br /><br /><br /><br /><br /><br /><hr /><br />
+						<h4>Are you using this somewhere where the tab code isn't already installed?</h4>
+						<p>Copy and paste the following code into your theme, just above the &lt;/body&gt; tag in theme.liquid:</p>
+<pre class="html-code">
+&lt;script&gt;<?php
+$js_string = file_get_contents('willtabs.min.js');
+echo htmlentities($js_string);
+?>
 &lt;/script&gt;</pre>
 					</div>
 				</div>
 			</div>
 <script id="tab-content-template" type="text/template">
 	<div id="tab-content-entry-COUNT">
-		<h5>Tab COUNT</h5>
+		<h4>Tab COUNT</h4>
 		<div class="tab-title">
 			<label for="t-c-i-COUNT">Tab title:</label>
 			<input id="t-c-i-COUNT" value="Tab COUNT" />
@@ -132,7 +156,7 @@
 		//Init wysiwyg editor
 		tinymce.init({
 			selector:'textarea',
-			plugins: 'paste'
+			plugins: 'paste code'
 		});
 
 		//Init code regions
@@ -145,17 +169,17 @@
 
 		function redrawTabOutput(){
 			//Create new markup
-			var newTabs = $('<ul class="willtab-tabs"></ul>');
-			var newTabAreas = $('<div class="willtab-content"></div>');
+			var $newTabs = $('<ul class="willtab-tabs"></ul>');
+			var $newTabAreas = $('<div class="willtab-content"></div>');
 
 			$('#tab-content-entry').children().slice(0, parseInt($('#tab-count').val())).each(function(index){
 				//Add tab
-				$('<li><a data-tab="' + index + '" href="#">' + $(this).find('input').val() + '</a></li>').appendTo(newTabs);
+				$('<li></li>').append($('<a href="#"></a>').attr({ 'data-tab': index, 'data-title': $(this).find('input').val() })).appendTo($newTabs);
 				//Add tab content
-				$('<div></div>').html($(this).find('textarea').val()).addClass('tab-' + index).appendTo(newTabAreas);
+				$('<div></div>').html($(this).find('textarea').val()).addClass('tab-' + index).appendTo($newTabAreas);
 			});
 
-			var newTabCont = $('<div class="willtab-container" />').append(newTabs).append(newTabAreas);
+			var newTabCont = $('<div class="willtab-container" />').append($newTabs).append($newTabAreas);
 			var newTabContHTML = htmlEntities(newTabCont.wrap('<div />').parent().html());
 
 			//Populate outputs
