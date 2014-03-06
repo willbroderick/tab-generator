@@ -10,7 +10,7 @@
         var settings = {
         	tabTextColour: '#333',
         	tabBG: '#eee',
-        	activeTextColour: '#333',
+        	activeTabTextColour: '#333',
         	activeTabBG: '#fff',
         	borderStyle: '1px solid #999',
         	tabTopMargin: '20px',
@@ -51,7 +51,7 @@
 						}
 					});
 					$lis.filter('.active').find('a').css({
-						'color': settings.activeTextColour,
+						'color': settings.activeTabTextColour,
 						'background': settings.activeTabBG,
 						'padding-top': '7px',
 						'margin-top': '0'
