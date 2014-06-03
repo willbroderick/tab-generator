@@ -123,6 +123,7 @@ $js_string = file_get_contents('willtabs.min.js');
 echo htmlentities($js_string);
 ?>
 &lt;/script&gt;</pre>
+						<p>You can change the colours using the hex-codes, if you like.</p>
 					</div>
 				</div>
 			</div>

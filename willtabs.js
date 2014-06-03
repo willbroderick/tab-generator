@@ -9,12 +9,16 @@
 		//Defaults
         var settings = {
         	tabTextColour: '#333',
-        	tabBG: '#eee',
+        	tabBG: '#f5f5f5',
         	activeTabTextColour: '#333',
         	activeTabBG: '#fff',
-        	borderStyle: '1px solid #999',
+        	borderStyle: '1px solid #aaa',
         	tabTopMargin: '20px',
-        	contentPadding: '10px 0'
+        	contentPadding: '10px 0',
+        	tabButtonPaddingTopBottom: 5,
+        	tabButtonPaddingLeftRight: 20,
+        	activeTabVerticalOffset: 6,
+        	borderRadius: 2
         };
         $.extend(settings, params);
         //Find tab groups
@@ -40,21 +44,29 @@
 						'border-top': settings.borderStyle,
 						'border-right': settings.borderStyle,
 						'border-left': settings.borderStyle,
+						'border-bottom': 'none',
 						'background': settings.tabBG,
-						'padding': '5px 15px',
-						'margin': '2px 0 0',
+						'padding': settings.tabButtonPaddingTopBottom + 'px ' + settings.tabButtonPaddingLeftRight + 'px',
+						'margin': settings.activeTabVerticalOffset + 'px 0 0',
 						'text-decoration': 'none',
-						'color': settings.tabTextColour
+						'color': settings.tabTextColour,
+						'border-top-left-radius': settings.borderRadius,
+						'border-top-right-radius': settings.borderRadius,
+						'position': 'relative',
+						'top': 0
 					}).each(function(index){
 						if(index > 0) {
+							//For all but first, nudge over to the left 1px to make a nice overlap
 							$(this).css('margin-left', '-1px');
 						}
 					});
 					$lis.filter('.active').find('a').css({
 						'color': settings.activeTabTextColour,
 						'background': settings.activeTabBG,
-						'padding-top': '7px',
-						'margin-top': '0'
+						'padding-top': settings.tabButtonPaddingTopBottom + settings.activeTabVerticalOffset - 1,
+						'padding-bottom': settings.tabButtonPaddingTopBottom + 1,
+						'margin-top': '0',
+						'top': 1
 					});
 				});
 				$tabs.find('li').css({
